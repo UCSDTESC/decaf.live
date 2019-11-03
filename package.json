@@ -1,0 +1,48 @@
+{
+  "name": "decaf.live",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^5.0.0",
+    "express": "^4.17.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0",
+    "react-scripts-ts": "^3.1.0",
+    "tsconfig-paths": "^3.9.0"
+  },
+  "proxy": "http://localhost:5000",
+  "scripts": {
+    "client": "react-scripts-ts start",
+    "client:build": "react-scripts-ts build",
+    "client:test": "react-scripts-ts test --env=jsdom",
+    "client:eject": "react-scripts-ts eject",
+    "start": "./node_modules/.bin/ts-node -P ./server/tsconfig.json -r tsconfig-paths/register ./server/index.ts",
+    "server:dev": "./node_modules/.bin/nodemon",
+    "start:dev": "node_modules/.bin/concurrently \"npm run server:dev\" \"npm run client\""
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "./"
+    ],
+    "exec": "npm start",
+    "ext": "ts"
+  }
+}
