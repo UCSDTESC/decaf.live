@@ -18,7 +18,13 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "~/*": [
+        "src/*"
+      ],
+      "@Shared/*": ["./src/shared/*"]
+    }
   },
   "exclude": [
     "node_modules",
@@ -27,6 +33,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "src/setupProxy.js"
   ]
 }

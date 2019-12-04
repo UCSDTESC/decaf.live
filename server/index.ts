@@ -1,10 +1,10 @@
 import * as express from "express";
+import {Config} from './config';
 
 const app = express();
 app.get("/api/", (req, res) => {
-  res.send("Hello World!!")
+  res.send("Hello World!!!!")
 })
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running in http://localhost:${PORT}`)
+app.listen(Config.Port, () => {
+  console.log(`Server is running in http://localhost:${Config.Port}`)
 })
