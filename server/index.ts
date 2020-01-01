@@ -16,6 +16,9 @@ function startInstance() {
     parameterLimit: 3000
   }));
 
+  app.use('/static', express.static(path.join(__dirname, '../build/static')));
+  app.use(express.static(path.join(__dirname, '../build')));
+  
   app.use('/api', MainRouter);
 
   app.get('/*', (req, res) => {
