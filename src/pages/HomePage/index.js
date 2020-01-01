@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Board from '../../components/Board';
 import {ReactComponent as DecafLogo} from '../../svg/decaf.svg';
+import {withFirebase} from '../../data/firebase';
 
 const Stripes = styled.div`
   height: 90%;
@@ -75,4 +76,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export default withFirebase(HomePage);

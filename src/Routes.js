@@ -2,20 +2,45 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
-import Firebase, {FirebaseContext} from './data/firebase';
+import AdminPage from './pages/AdminPage';
+import ProtectedRoute from './ProtectedRoute';
+import LoginPage from './pages/LoginPage';
+import { withFirebase } from './data/firebase';
 
-function Routes() {
-  return (
-    <FirebaseContext.Provider value={new Firebase()}>
+class Routes extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false
+    }
+  }
+
+  async componentWillMount() {
+    await this.props.firebase.checkUserAuth(user => {
+      if (user) {
+        this.setState({loggedIn: true})
+      } else {
+        this.setState({loggedIn: false})
+      }
+    })
+  }
+
+  render() {
+    return (
       <Switch>
         <Route exact={true} path='/'>
-          <FirebaseContext.Consumer>
-            {firebase => <HomePage firebase={firebase} />}
-          </FirebaseContext.Consumer>
+          <HomePage />
         </Route> 
+        <Route exact={true} path='/login'>
+          <LoginPage />
+        </Route>
+        <ProtectedRoute exact={true} path='/admin' authenticated={this.state.loggedIn}>
+          <AdminPage />
+        </ProtectedRoute>
       </Switch>
-    </FirebaseContext.Provider>
-  );
+    );
+  }
 }
 
-export default Routes;
+export default withFirebase(Routes);
