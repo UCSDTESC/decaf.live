@@ -35,7 +35,6 @@ class HomePage extends React.Component {
 
   async componentDidMount() {
     this.ticketRef = this.props.firebase.tickets();
-    console.log(this.ticketRef)
     this.ticketRef.on('value', (data) => {
       const ticketNum = data.val().ticketNum;
       this.setState({

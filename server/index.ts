@@ -1,7 +1,6 @@
 import * as express from "express";
 import {Config} from './config';
 import MainRouter from './routers';
-import {startPoller} from './poller';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 
@@ -24,8 +23,6 @@ function startInstance() {
   app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'))
   })
-
-  startPoller();
 
   app.listen(Config.Port, () => {
     console.log(`Server is running on Port: ${Config.Port}`)

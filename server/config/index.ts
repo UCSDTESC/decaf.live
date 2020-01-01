@@ -11,7 +11,4 @@ export const Config = {
   IsDev: NodeEnv === 'development',
   IsProd: NodeEnv === 'production',
   MongoURI: String(process.env.MONGO_URI),
-  AirtableKey: String(process.env.AIRTABLE_KEY),
-  AirtableBase: String(process.env.AIRTABLE_BASE),
-  TicketDataFile: path.join(__dirname, '../data/ticket.json')
 }
