@@ -3,17 +3,7 @@ import styled from 'styled-components';
 import Board from '../../components/Board';
 import {ReactComponent as DecafLogo} from '../../svg/decaf.svg';
 import {withFirebase} from '../../data/firebase';
-
-const Stripes = styled.div`
-  height: 90%;
-  background: repeating-linear-gradient(
-    90deg,
-    #d49454,
-    #d49454 10px,
-    #f3c585 10px,
-    #f3c585 50px
-  );
-`
+import Stripes from '../../components/Stripes';
 
 const Logo = styled(DecafLogo)`
     width: 40%;

@@ -6,11 +6,21 @@ import {compose} from 'recompose';
 
 class ProtectedRoute extends React.Component {
 
+  deferredRedirect() {
+    setTimeout(() => {
+      if (!this.props.authenticated) this.props.history.push('/login')
+    }, 3000)
+  }
+
   render() {
     const {authenticated} = this.props;
-
     if (!authenticated) {
-      this.props.history.push('/login')
+      this.deferredRedirect()
+      return (
+        <div>
+          Redirecting.....
+        </div>
+      )
     }
 
     return (

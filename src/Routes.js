@@ -33,7 +33,7 @@ class Routes extends React.Component {
           <HomePage />
         </Route> 
         <Route exact={true} path='/login'>
-          <LoginPage />
+          <LoginPage authenticated={this.state.loggedIn}/>
         </Route>
         <ProtectedRoute exact={true} path='/admin' authenticated={this.state.loggedIn}>
           <AdminPage />
