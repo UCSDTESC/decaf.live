@@ -29,6 +29,8 @@ class Firebase {
   checkUserAuth = (user) => this.auth.onAuthStateChanged(user)
 
   logout = () => this.auth.signOut();
+
+  updateTicketNum = (newNum) => this.db.ref('ticket').update({ticketNum: newNum})
 }
 
 export default Firebase;
