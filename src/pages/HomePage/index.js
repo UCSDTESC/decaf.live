@@ -34,13 +34,15 @@ class HomePage extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await fetch('/api/tickets')
-    const data = await res.json();
-
-    this.setState({
-      loading: false,
-      ticketNum: data.ticketNum
-    })
+    this.ticketRef = this.props.firebase.tickets();
+    console.log(this.ticketRef)
+    this.ticketRef.on('value', (data) => {
+      const ticketNum = data.val().ticketNum;
+      this.setState({
+        loading: false,
+        ticketNum: ticketNum
+      })
+    }, (err) => console.error(err))
   }  
   
   render() {
