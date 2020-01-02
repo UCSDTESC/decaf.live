@@ -20,23 +20,27 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      ticketNum: null
+      eastTicketNum: null,
+	  westTicketNum: null
     }
   }
 
   async componentDidMount() {
     this.ticketRef = this.props.firebase.tickets();
     this.ticketRef.on('value', (data) => {
-      const ticketNum = data.val().ticketNum;
+      const eastTicketNum = data.val().eastTicketNum;
+	  const westTicketNum = data.val().westTicketNum;
       this.setState({
         loading: false,
-        ticketNum: ticketNum
+        eastTicketNum: eastTicketNum,
+		westTicketNum: westTicketNum
+		
       })
     }, (err) => console.error(err))
   }  
   
   render() {
-    const {loading, ticketNum} = this.state;
+    const {loading, eastTicketNum, westTicketNum} = this.state;
 
     return (
       <Stripes className="container-fluid d-flex">
@@ -53,7 +57,10 @@ class HomePage extends React.Component {
                       some kind of faq / user education thing here
                     </div>
                     <Counter className="text-center mt-2">
-                      Current Ticket Number: {loading ? 'Loading..' : ticketNum}
+                      Current East Ballroom Ticket Number: {loading ? 'Loading..' : eastTicketNum}
+                    </Counter>
+                    <Counter className="text-center mt-2">
+                      Current West Ballroom Ticket Number: {loading ? 'Loading..' : westTicketNum}
                     </Counter>
                   </div>
                 </div>

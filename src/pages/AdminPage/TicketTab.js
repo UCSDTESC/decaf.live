@@ -7,8 +7,10 @@ class TicketTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currTicketNum: null,
-      inputTicketNum: '',
+      eastCurrTicketNum: null,
+	  westCurrTicketNum: null,
+      eastInputTicketNum: '',
+	  westInputTicketNum: '',
       error: ''
     }
   }
@@ -16,28 +18,42 @@ class TicketTab extends React.Component {
   async componentDidMount() {
     this.ticketRef = this.props.firebase.tickets();
     this.ticketRef.on('value', (data) => {
-      const ticketNum = data.val().ticketNum;
+      const eastTicketNum = data.val().eastTicketNum;
+	  const westTicketNum = data.val().westTicketNum;
       this.setState({
         loading: false,
-        currTicketNum: ticketNum
+        eastCurrTicketNum: eastTicketNum,
+		westCurrTicketNum: westTicketNum
       })
     }, (err) => console.error(err))
   }  
 
-  onInput = (e) => {
-    this.setState({inputTicketNum: e.target.value})
+  onEastInput = (e) => {
+    this.setState({eastInputTicketNum: e.target.value})
   }
 
-  submitTicketUpdate = async () => {
+  submitEastTicketUpdate = async () => {
     try {
-      await this.props.firebase.updateTicketNum(this.state.inputTicketNum);
+      await this.props.firebase.updateEastTicketNum(this.state.eastInputTicketNum);
+    } catch {
+      this.setState({error: 'Something Went Wrong with updating the ticket number'})
+    }
+  }
+  
+   onWestInput = (e) => {
+    this.setState({westInputTicketNum: e.target.value})
+  }
+
+  submitWestTicketUpdate = async () => {
+    try {
+      await this.props.firebase.updateWestTicketNum(this.state.westInputTicketNum);
     } catch {
       this.setState({error: 'Something Went Wrong with updating the ticket number'})
     }
   }
 
   render() {
-    const {currTicketNum, inputTicketNum, error} = this.state;
+    const {eastCurrTicketNum, eastInputTicketNum, westCurrTicketNum, westInputTicketNum, error} = this.state;
     return (
       <div className="mt-3 w-100">
         <Board>
@@ -45,22 +61,38 @@ class TicketTab extends React.Component {
             <div className="row">
               <div className="col-12">
                 <h3 className="text-center">
-                  The Current Ticket Number is {' '}
+                  The Current East Ballrom Ticket Number is {' '}
                   <span className="text-success">
-                    {currTicketNum ? currTicketNum : 'Loading....'}
+                    {eastCurrTicketNum ? eastCurrTicketNum : 'Loading....'}
+                  </span>
+                </h3>
+				<h3 className="text-center">
+                  The Current West Ballroom Ticket Number is {' '}
+                  <span className="text-success">
+                    {westCurrTicketNum ? westCurrTicketNum : 'Loading....'}
                   </span>
                 </h3>
                 <div className="text-center">
                   {error}
                 </div>
                 <div className="text-center mt-5 ">
-                  Update Ticket Number to:
-                  <input type="number" onChange={this.onInput} className="form-control w-auto mx-auto mt-3" placeholder={currTicketNum}></input>
+                  Update East Ballroom Ticket Number to:
+                  <input type="number" onChange={this.onEastInput} className="form-control w-auto mx-auto mt-3" placeholder={eastCurrTicketNum}></input>
                   <button className="btn mt-1 btn-light"
-                   onClick={this.submitTicketUpdate}
-                   disabled={!inputTicketNum}
+                   onClick={this.submitEastTicketUpdate}
+                   disabled={!eastInputTicketNum}
                    >
-                    Update Ticket Number
+                    Update East Ballroom Ticket Number
+                  </button>
+                </div>
+				<div className="text-center mt-5 ">
+                  Update West Ballroom Ticket Number to:
+                  <input type="number" onChange={this.onWestInput} className="form-control w-auto mx-auto mt-3" placeholder={westCurrTicketNum}></input>
+                  <button className="btn mt-1 btn-light"
+                   onClick={this.submitWestTicketUpdate}
+                   disabled={!westInputTicketNum}
+                   >
+                    Update West Ballroom Ticket Number
                   </button>
                 </div>
               </div>
