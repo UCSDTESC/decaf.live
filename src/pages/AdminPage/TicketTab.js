@@ -61,7 +61,7 @@ class TicketTab extends React.Component {
             <div className="row">
               <div className="col-12">
                 <h3 className="text-center">
-                  The Current East Ballrom Ticket Number is {' '}
+                  The Current East Ballroom Ticket Number is {' '}
                   <span className="text-success">
                     {eastCurrTicketNum ? eastCurrTicketNum : 'Loading....'}
                   </span>

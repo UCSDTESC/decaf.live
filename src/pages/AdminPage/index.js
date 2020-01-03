@@ -58,9 +58,9 @@ class AdminPage extends React.Component {
   render() {
     return (
       <Stripes className="container-fluid d-flex flex-column">
-        <div className="w-50 d-flex align-self-center py-5">
+        <div className="w-75 d-flex align-self-center py-5">
           <Board> 
-            <h1 className="text-center">
+            <h1 className="text-center d-block">
               Decaf.live Admin Dashboard
             </h1>
           </Board>
