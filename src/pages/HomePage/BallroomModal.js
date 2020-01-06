@@ -13,6 +13,12 @@ class BallroomModal extends React.Component {
             <div className="container-fluid">
               <div className="row">
                 <img className="img-fluid" src="/map-preview.gif"/>
+                <a className="text-center w-100">
+                  Open map in a new tab {'<link-icon></link-icon>'}
+                </a>
+              </div>
+              <div className="row">
+                company list? idk
               </div>
             </div>
           </ModalBody>
