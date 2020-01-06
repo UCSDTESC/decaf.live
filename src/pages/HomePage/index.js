@@ -73,11 +73,28 @@ class HomePage extends React.Component {
   renderModal = () => {
     const {currentModal} = this.state;
 
+    const modalProps = {
+      open: true,
+      toggle: () => this.setState({currentModal: ModalStates.None})
+    }
+
+    const westProps = {
+      ...modalProps, 
+      title: 'West Ballroom'
+    }
+
+    const eastProps = {
+      ...modalProps,
+      title: 'East Ballroom'
+    }
+
     switch (currentModal) {
       case ModalStates.West:
-        return <BallroomModal open={true} toggle={() => this.setState({currentModal: ModalStates.None})}/>
+        return <BallroomModal 
+          {...westProps}
+        />
       case ModalStates.East:
-        return <BallroomModal open={true} toggle={() => this.setState({currentModal: ModalStates.None})}/>
+        return <BallroomModal {...eastProps}/>
       case ModalStates.None:
       default:
         return null;
