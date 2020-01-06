@@ -6,6 +6,7 @@ import {ReactComponent as Planter1} from '../../svg/decaf-planter1.svg';
 import {ReactComponent as Planter2} from '../../svg/decaf-planter2.svg';
 import {ReactComponent as Planter3} from '../../svg/decaf-planter3.svg';
 import {withFirebase} from '../../data/firebase';
+import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
 
 const Logo = styled(DecafLogo)`
@@ -23,8 +24,21 @@ const Counter = styled.div`
 
 const Underline = styled.span`
   text-decoration: underline;
+  color: lightblue;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
   //text-decoration-style: wavy;
 `
+
+// lol no enums in js..
+const ModalStates = {
+  None: 0,
+  West: 1,
+  East: 2
+}
 
 class HomePage extends React.Component {
 
@@ -33,7 +47,8 @@ class HomePage extends React.Component {
     this.state = {
       loading: true,
       eastTicketNum: null,
-	  westTicketNum: null
+      westTicketNum: null,
+      currentModal: ModalStates.None
     }
   }
 
@@ -54,11 +69,43 @@ class HomePage extends React.Component {
     this.unsubscribe();
   }
 
+  renderModal = () => {
+    const {currentModal} = this.state;
+
+    const modalProps = {
+      open: true,
+      toggle: () => this.setState({currentModal: ModalStates.None})
+    }
+
+    const westProps = {
+      ...modalProps,
+      title: 'West Ballroom'
+    }
+
+    const eastProps = {
+      ...modalProps,
+      title: 'East Ballroom'
+    }
+
+    switch (currentModal) {
+      case ModalStates.West:
+        return <BallroomModal
+          {...westProps}
+        />
+      case ModalStates.East:
+        return <BallroomModal {...eastProps}/>
+      case ModalStates.None:
+      default:
+        return null;
+    }
+  }
+
   render() {
     const {loading, eastTicketNum, westTicketNum} = this.state;
 
     return (
       <Stripes className="container-fluid d-flex flex-column">
+        {this.renderModal()}
         <div className="row w-100 mx-auto mb-auto mt-5">
           <div className="col-md-10 offset-md-1">
             <Board>
@@ -69,7 +116,7 @@ class HomePage extends React.Component {
                       <Logo />
                     </div>
                     <Counter className="text-center mt-2">
-                      Current <Underline>East Ballroom</Underline> Ticket Number: {' '}
+                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.East})}>East Ballroom</Underline> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
@@ -77,7 +124,7 @@ class HomePage extends React.Component {
                       : <Num>{eastTicketNum}</Num>}
                     </Counter>
                     <Counter className="text-center mt-2">
-                      Current <Underline>West Ballroom</Underline> Ticket Number: {' '}
+                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.West})}>West Ballroom</Underline> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
