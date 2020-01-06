@@ -26,6 +26,14 @@ const Underline = styled.span`
   //text-decoration-style: wavy;
 `
 
+const PopupBody = styled.div`
+  color: black;
+  margin: 2rem;
+`
+
+const Form = styled.form`
+`
+
 class HomePage extends React.Component {
 
   constructor(props) {
@@ -33,7 +41,7 @@ class HomePage extends React.Component {
     this.state = {
       loading: true,
       eastTicketNum: null,
-	  westTicketNum: null
+	    westTicketNum: null
     }
   }
 
@@ -50,6 +58,31 @@ class HomePage extends React.Component {
       })
     }, (err) => console.error(err))
   }  
+
+  submitNewUser = async (userInfo) => {
+    try {
+      await this.props.firebase.addUserNotifInfo(this.state.userInfo);
+    } catch {
+      this.setState({error: 'Something Went Wrong with updating the ticket number'})
+    }
+  }
+
+  validateForm() {
+    var name = document.forms["notif-form"]["name"].value;
+    var email = document.forms["notif-form"]["email"].value;
+    var phone = document.forms["notif-form"]["phone"].value;
+    var ticket = document.forms["notif-form"]["ticket"].value;
+    console.log(name + " " + email + " " + phone + " " + ticket);
+
+    var userInfo = {
+      fullName: name,
+      email: email,
+      phone: phone,
+      ticket: ticket
+    }
+
+    //submitNewUser(userInfo);
+  }
   
   componentWillUnmount() {
     this.unsubscribe();
@@ -90,6 +123,53 @@ class HomePage extends React.Component {
                         <li>Please wait in line</li>
                         <li>Thank You!</li>
                       </ul>
+                    </div>
+                    <div className="my-3 ml-5">
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Sign up for notifications
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      {/* <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> */}
+      <PopupBody class="modal-body">
+        <Form name="notif-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="First Name and Last Name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="phone" class="form-control" id="phone" placeholder="5555555555" />
+          </div>
+          <div class="form-group">
+            <label for="ticket">Ticket Number</label>
+            <input type="text" class="form-control" id="ticket" placeholder="12" />
+          </div>
+        </Form>
+      </PopupBody>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onClick={this.validateForm}>Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
                     </div>
                   </div>
                 </div>

@@ -33,6 +33,13 @@ class Firebase {
   updateEastTicketNum = (newNum) => this.db.ref('ticket').update({eastTicketNum: newNum})
   
   updateWestTicketNum = (newNum) => this.db.ref('ticket').update({westTicketNum: newNum})
+
+  addUserNotifInfo = (userInfo) => this.db.ref('userData').add({
+    fullName: userInfo.fullName,
+    email: userInfo.email,
+    phone: userInfo.phone,
+    ticketNum: userInfo.ticket
+  })
 }
 
 export default Firebase;
