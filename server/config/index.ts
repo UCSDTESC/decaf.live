@@ -13,5 +13,6 @@ export const Config = {
   MongoURI: String(process.env.MONGO_URI),
   TwilioSID: String(process.env.REACT_APP_TWILIO_ACCOUNT_SID),
   TwilioAuthToken: String(process.env.REACT_APP_TWILIO_AUTH_TOKEN),
-  TwilioNotifySID: String(process.env.REACT_APP_TWILIO_SERVICE_SID)
+  TwilioNotifySID: String(process.env.REACT_APP_TWILIO_SERVICE_SID),
+  SendgridAPIKey: String(process.env.REACT_APP_SENDGRID_API_KEY)
 }
