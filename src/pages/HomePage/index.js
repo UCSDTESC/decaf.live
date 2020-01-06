@@ -41,16 +41,15 @@ class HomePage extends React.Component {
     this.ticketRef = this.props.firebase.tickets();
     this.unsubscribe = this.ticketRef.on('value', (data) => {
       const eastTicketNum = data.val().eastTicketNum;
-	  const westTicketNum = data.val().westTicketNum;
+      const westTicketNum = data.val().westTicketNum;
       this.setState({
         loading: false,
         eastTicketNum: eastTicketNum,
-		westTicketNum: westTicketNum
-		
+		    westTicketNum: westTicketNum
       })
     }, (err) => console.error(err))
-  }  
-  
+  }
+
   componentWillUnmount() {
     this.unsubscribe();
   }
@@ -66,7 +65,7 @@ class HomePage extends React.Component {
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12">
-                    <div className="text-center"> 
+                    <div className="text-center">
                       <Logo />
                     </div>
                     <Counter className="text-center mt-2">
@@ -98,9 +97,9 @@ class HomePage extends React.Component {
           </div>
         </div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
-          <Planter1 className="w-10 mt-auto mx-auto"/> 
-          <Planter2 className="w-10 mt-auto mx-auto"/> 
-          <Planter3 className="w-10 mt-auto mx-auto"/> 
+          <Planter1 className="w-10 mt-auto mx-auto"/>
+          <Planter2 className="w-10 mt-auto mx-auto"/>
+          <Planter3 className="w-10 mt-auto mx-auto"/>
         </div>
       </Stripes>
     );
