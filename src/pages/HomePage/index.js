@@ -7,6 +7,7 @@ import {ReactComponent as Planter2} from '../../svg/decaf-planter2.svg';
 import {ReactComponent as Planter3} from '../../svg/decaf-planter3.svg';
 import {withFirebase} from '../../data/firebase';
 import Stripes from '../../components/Stripes';
+import UserDataForm from './UserDataForm';
 
 const Logo = styled(DecafLogo)`
     width: 40%;
@@ -124,59 +125,22 @@ class HomePage extends React.Component {
                         <li>Thank You!</li>
                       </ul>
                     </div>
-                    <div className="my-3 ml-5">
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Sign up for notifications
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      {/* <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> */}
-      <PopupBody class="modal-body">
-        <Form name="notif-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="First Name and Last Name" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="phone" class="form-control" id="phone" placeholder="5555555555" />
-          </div>
-          <div class="form-group">
-            <label for="ticket">Ticket Number</label>
-            <input type="text" class="form-control" id="ticket" placeholder="12" />
-          </div>
-        </Form>
-      </PopupBody>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" onClick={this.validateForm}>Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-                    </div>
                   </div>
                 </div>
               </div>
             </Board>
           </div>
         </div>
+        <div className="col-md-10 offset-md-1 mt-5">
+            <Board>
+              <div className="text-center">
+                <Counter>Subscribe to Ticket Number Notifications</Counter>
+              </div>
+              <div className="container-fluid">
+                <UserDataForm />
+              </div>
+            </Board>
+          </div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
           <Planter1 className="w-10 mt-auto mx-auto"/> 
           <Planter2 className="w-10 mt-auto mx-auto"/> 

@@ -38,7 +38,7 @@ class Firebase {
     fullName: userInfo.fullName,
     email: userInfo.email,
     phone: userInfo.phone,
-    ticketNum: userInfo.ticket
+    ticketNum: userInfo.ticketNum
   })
 }
 
