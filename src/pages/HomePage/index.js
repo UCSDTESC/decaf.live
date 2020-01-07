@@ -6,6 +6,7 @@ import {ReactComponent as Planter1} from '../../svg/decaf-planter1.svg';
 import {ReactComponent as Planter2} from '../../svg/decaf-planter2.svg';
 import {ReactComponent as Planter3} from '../../svg/decaf-planter3.svg';
 import {withFirebase} from '../../data/firebase';
+import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
 import UserDataForm from './UserDataForm';
 
@@ -24,6 +25,12 @@ const Counter = styled.div`
 
 const Underline = styled.span`
   text-decoration: underline;
+  color: lightblue;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
   //text-decoration-style: wavy;
 `
 
@@ -34,6 +41,12 @@ const PopupBody = styled.div`
 
 const Form = styled.form`
 `
+// lol no enums in js..
+const ModalStates = {
+  None: 0,
+  West: 1,
+  East: 2
+}
 
 class HomePage extends React.Component {
 
@@ -42,7 +55,8 @@ class HomePage extends React.Component {
     this.state = {
       loading: true,
       eastTicketNum: null,
-	    westTicketNum: null
+      westTicketNum: null,
+      currentModal: ModalStates.None
     }
   }
 
@@ -50,43 +64,48 @@ class HomePage extends React.Component {
     this.ticketRef = this.props.firebase.tickets();
     this.unsubscribe = this.ticketRef.on('value', (data) => {
       const eastTicketNum = data.val().eastTicketNum;
-	  const westTicketNum = data.val().westTicketNum;
+      const westTicketNum = data.val().westTicketNum;
       this.setState({
         loading: false,
         eastTicketNum: eastTicketNum,
-		westTicketNum: westTicketNum
-		
+		    westTicketNum: westTicketNum
       })
     }, (err) => console.error(err))
   }  
 
-  submitNewUser = async (userInfo) => {
-    try {
-      await this.props.firebase.addUserNotifInfo(this.state.userInfo);
-    } catch {
-      this.setState({error: 'Something Went Wrong with updating the ticket number'})
-    }
-  }
-
-  validateForm() {
-    var name = document.forms["notif-form"]["name"].value;
-    var email = document.forms["notif-form"]["email"].value;
-    var phone = document.forms["notif-form"]["phone"].value;
-    var ticket = document.forms["notif-form"]["ticket"].value;
-    console.log(name + " " + email + " " + phone + " " + ticket);
-
-    var userInfo = {
-      fullName: name,
-      email: email,
-      phone: phone,
-      ticket: ticket
-    }
-
-    //submitNewUser(userInfo);
-  }
-  
   componentWillUnmount() {
     this.unsubscribe();
+  }
+
+  renderModal = () => {
+    const {currentModal} = this.state;
+
+    const modalProps = {
+      open: true,
+      toggle: () => this.setState({currentModal: ModalStates.None})
+    }
+
+    const westProps = {
+      ...modalProps,
+      title: 'West Ballroom'
+    }
+
+    const eastProps = {
+      ...modalProps,
+      title: 'East Ballroom'
+    }
+
+    switch (currentModal) {
+      case ModalStates.West:
+        return <BallroomModal
+          {...westProps}
+        />
+      case ModalStates.East:
+        return <BallroomModal {...eastProps}/>
+      case ModalStates.None:
+      default:
+        return null;
+    }
   }
 
   render() {
@@ -94,17 +113,18 @@ class HomePage extends React.Component {
 
     return (
       <Stripes className="container-fluid d-flex flex-column">
+        {this.renderModal()}
         <div className="row w-100 mx-auto mb-auto mt-5">
           <div className="col-md-10 offset-md-1">
             <Board>
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12">
-                    <div className="text-center"> 
+                    <div className="text-center">
                       <Logo />
                     </div>
                     <Counter className="text-center mt-2">
-                      Current <Underline>East Ballroom</Underline> Ticket Number: {' '}
+                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.East})}>East Ballroom</Underline> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
@@ -112,7 +132,7 @@ class HomePage extends React.Component {
                       : <Num>{eastTicketNum}</Num>}
                     </Counter>
                     <Counter className="text-center mt-2">
-                      Current <Underline>West Ballroom</Underline> Ticket Number: {' '}
+                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.West})}>West Ballroom</Underline> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
@@ -142,9 +162,9 @@ class HomePage extends React.Component {
             </Board>
           </div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
-          <Planter1 className="w-10 mt-auto mx-auto"/> 
-          <Planter2 className="w-10 mt-auto mx-auto"/> 
-          <Planter3 className="w-10 mt-auto mx-auto"/> 
+          <Planter1 className="w-10 mt-auto mx-auto"/>
+          <Planter2 className="w-10 mt-auto mx-auto"/>
+          <Planter3 className="w-10 mt-auto mx-auto"/>
         </div>
       </Stripes>
     );

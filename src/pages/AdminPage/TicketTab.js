@@ -7,26 +7,12 @@ class TicketTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eastCurrTicketNum: null,
-	  westCurrTicketNum: null,
       eastInputTicketNum: '',
-	  westInputTicketNum: '',
+	    westInputTicketNum: '',
       error: ''
     }
   }
 
-  async componentDidMount() {
-    this.ticketRef = this.props.firebase.tickets();
-    this.ticketRef.on('value', (data) => {
-      const eastTicketNum = data.val().eastTicketNum;
-	  const westTicketNum = data.val().westTicketNum;
-      this.setState({
-        loading: false,
-        eastCurrTicketNum: eastTicketNum,
-		westCurrTicketNum: westTicketNum
-      })
-    }, (err) => console.error(err))
-  }  
 
   onEastInput = (e) => {
     this.setState({eastInputTicketNum: e.target.value})
@@ -39,7 +25,7 @@ class TicketTab extends React.Component {
       this.setState({error: 'Something Went Wrong with updating the ticket number'})
     }
   }
-  
+
    onWestInput = (e) => {
     this.setState({westInputTicketNum: e.target.value})
   }
@@ -53,7 +39,8 @@ class TicketTab extends React.Component {
   }
 
   render() {
-    const {eastCurrTicketNum, eastInputTicketNum, westCurrTicketNum, westInputTicketNum, error} = this.state;
+    const { eastInputTicketNum, westInputTicketNum, error} = this.state;
+    const {eastCurrTicketNum, westCurrTicketNum} = this.props;
     return (
       <div className="mt-3 w-100">
         <Board>
@@ -66,7 +53,7 @@ class TicketTab extends React.Component {
                     {eastCurrTicketNum ? eastCurrTicketNum : 'Loading....'}
                   </span>
                 </h3>
-				<h3 className="text-center">
+				        <h3 className="text-center">
                   The Current West Ballroom Ticket Number is {' '}
                   <span className="text-success">
                     {westCurrTicketNum ? westCurrTicketNum : 'Loading....'}
@@ -97,7 +84,7 @@ class TicketTab extends React.Component {
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
         </Board>
       </div>
     );

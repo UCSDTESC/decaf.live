@@ -36,8 +36,16 @@ class UserDataForm extends React.Component {
       <Formik
       validationSchema={this.schema}
       initialValues={{ fullName: '', email: '', ticketNum: '', phone: '' }}
-      onSubmit={(values, { setSubmitting }) => {
-        this.props.firebase.addUserNotifInfo(values);
+      onSubmit={async (values, { setSubmitting, setFieldError, setStatus, resetForm }) => {
+        try {
+          await this.props.firebase.addUserNotifInfo(values);
+          setStatus({success: 'Done!'})
+          resetForm();
+        } catch {
+          setFieldError('general', 'Something went wrong during form submit')
+        } finally {
+          setSubmitting(false);
+        }
       }}
     >
     {({
@@ -48,9 +56,13 @@ class UserDataForm extends React.Component {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        status
         /* and other goodies */
       }) => (
       <form className="mt-5" onSubmit={handleSubmit}>
+        <div className="text-center">
+          {status ? status.success : ''}
+        </div>
         <div className="row">
           <div className="col">
             <label>Full Name</label>
@@ -73,6 +85,9 @@ class UserDataForm extends React.Component {
         </div>
         <div className="row">
           <button type="submit" className="mx-auto mt-4 btn btn-light">Subscribe</button>
+          <div className="text-center text-danger">
+            {errors.general}
+          </div>
         </div>
       </form>)}
       </Formik>
