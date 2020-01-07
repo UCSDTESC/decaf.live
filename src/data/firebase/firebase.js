@@ -36,6 +36,12 @@ class Firebase {
 
   updateWestTicketNum = (newNum) => this.db.ref('ticket').update({westTicketNum: newNum})
 
+  addUserNotifInfo = (userInfo) => this.firestore.collection("userData").add({
+    fullName: userInfo.fullName,
+    email: userInfo.email,
+    phone: userInfo.phone,
+    ticketNum: userInfo.ticketNum
+  })
 
   getWhoToSend = async (east) => {
     const data = await this.tickets().once('value');

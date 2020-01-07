@@ -8,6 +8,7 @@ import {ReactComponent as Planter3} from '../../svg/decaf-planter3.svg';
 import {withFirebase} from '../../data/firebase';
 import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
+import UserDataForm from './UserDataForm';
 
 const Logo = styled(DecafLogo)`
     width: 40%;
@@ -33,6 +34,13 @@ const Underline = styled.span`
   //text-decoration-style: wavy;
 `
 
+const PopupBody = styled.div`
+  color: black;
+  margin: 2rem;
+`
+
+const Form = styled.form`
+`
 // lol no enums in js..
 const ModalStates = {
   None: 0,
@@ -63,7 +71,7 @@ class HomePage extends React.Component {
 		    westTicketNum: westTicketNum
       })
     }, (err) => console.error(err))
-  }
+  }  
 
   componentWillUnmount() {
     this.unsubscribe();
@@ -143,6 +151,16 @@ class HomePage extends React.Component {
             </Board>
           </div>
         </div>
+        <div className="col-md-10 offset-md-1 mt-5">
+            <Board>
+              <div className="text-center">
+                <Counter>Subscribe to Ticket Number Notifications</Counter>
+              </div>
+              <div className="container-fluid">
+                <UserDataForm />
+              </div>
+            </Board>
+          </div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
           <Planter1 className="w-10 mt-auto mx-auto"/>
           <Planter2 className="w-10 mt-auto mx-auto"/>
