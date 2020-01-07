@@ -17,16 +17,31 @@ class AdminPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currTab: 0
+      currTab: 0,
+      eastCurrTicketNum: null,
+      westCurrTicketNum: null,
     }
 
     this.tabs = [{
-      component: TicketTab, 
+      component: TicketTab,
       name: 'Update Current Ticket'
     }, {
-      component: NotifTab, 
+      component: NotifTab,
       name: 'Send Ticket Notifications'
     }]
+  }
+
+  async componentDidMount() {
+    this.ticketRef = this.props.firebase.tickets();
+    this.ticketRef.on('value', (data) => {
+      const eastTicketNum = data.val().eastTicketNum;
+    const westTicketNum = data.val().westTicketNum;
+      this.setState({
+        loading: false,
+        eastCurrTicketNum: eastTicketNum,
+    westCurrTicketNum: westTicketNum
+      })
+    }, (err) => console.error(err))
   }
 
   renderTabPanel() {
@@ -50,23 +65,23 @@ class AdminPage extends React.Component {
   }
 
   renderCurrTab() {
-    const {currTab} = this.state;
+    const {currTab, eastCurrTicketNum, westCurrTicketNum} = this.state;
     const Component = this.tabs[currTab].component;
-    return <Component />
+    return <Component eastCurrTicketNum={eastCurrTicketNum} westCurrTicketNum={westCurrTicketNum}/>
   }
 
   render() {
     return (
       <Stripes className="container-fluid d-flex flex-column">
         <div className="w-75 d-flex align-self-center py-5">
-          <Board> 
+          <Board>
             <h1 className="text-center d-block">
               Decaf.live Admin Dashboard
             </h1>
           </Board>
         </div>
         <div className="container pt-2">
-          <div className="row"> 
+          <div className="row">
             <div className="col-md-12">
               {this.renderTabPanel()}
             </div>
@@ -74,7 +89,7 @@ class AdminPage extends React.Component {
           <div className="row">
           <div className="col-md-12">
               {this.renderCurrTab()}
-            </div>        
+            </div>
           </div>
         </div>
       </Stripes>
