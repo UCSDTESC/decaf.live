@@ -40,7 +40,9 @@ class Firebase {
     fullName: userInfo.fullName,
     email: userInfo.email,
     phone: userInfo.phone,
-    ticketNum: userInfo.ticketNum
+    ticketNum: userInfo.ticketNum,
+    notifiedEast: false,
+    notifiedWest: false
   })
 
   getWhoToSend = async (east) => {
