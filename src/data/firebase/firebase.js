@@ -36,14 +36,58 @@ class Firebase {
 
   updateWestTicketNum = (newNum) => this.db.ref('ticket').update({westTicketNum: newNum})
 
-  addUserNotifInfo = (userInfo) => this.firestore.collection("userData").add({
-    fullName: userInfo.fullName,
-    email: userInfo.email,
-    phone: userInfo.phone,
-    ticketNum: userInfo.ticketNum,
-    notifiedEast: false,
-    notifiedWest: false
-  })
+  addUserNotifInfo = (userInfo) => {
+    this.firestore.collection("userData").add({
+      fullName: userInfo.fullName,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      ticketNum: userInfo.ticketNum,
+      notifiedEast: false,
+      notifiedWest: false
+    })
+
+    // send initial sms
+    if (userInfo.phone) {
+      const usNumber = '+1' + userInfo.phone;
+      const smsBody = {
+        'bindings': [JSON.stringify({binding_type: 'sms', address: usNumber})],
+        'message': "Hello from Decaf! You'll get a message when you can " +
+                   "enter each ballroom. Remember to bring your UCSD ID, " +
+                   "ticket, and wristband. Reply STOP to unsubscribe."
+      };
+      fetch('/api/sms', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(smsBody)
+      })
+      .then((res) => console.log(res))
+      .catch(err => {
+        console.log(err);
+      });
+    }
+
+    // send initial email
+    if (userInfo.email) {
+      const emailBody = {
+        'emails': [userInfo.email],
+        'message': "You are now signed up to receive an email when the ticket " +
+                   "number you entered is eligible to enter each ballroom."
+      }
+      fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailBody)
+      })
+      .then((res) => console.log(res))
+      .catch(err => {
+        console.log(err);
+      });
+    }
+  }
 
   getWhoToSend = async (east) => {
     const data = await this.tickets().once('value');
