@@ -24,12 +24,14 @@ class UserDataForm extends React.Component {
 
   constructor(props) {  
     super(props);
+    const phoneRegex = /^[0-9]{10}$/;
     this.schema = yup.object({
       fullName: yup.string().required('Name is required'),
       email: yup.string().email('Invalid Email'),
       ticketNum: yup.number().required('Ticket Number is required'),
+      phone: yup.string().matches(phoneRegex, 'Phone Number is not valid')
     })
-}
+  }
 
   render() {
     return (
@@ -80,7 +82,7 @@ class UserDataForm extends React.Component {
           </div>
           <div className="col">
             <label>Phone Number</label>
-            <Field name="phone" type="number" component={input} placeholder={11111111} />
+            <Field name="phone" type="number" component={input} placeholder={1234567890} />
           </div>
         </div>
         <div className="row">
