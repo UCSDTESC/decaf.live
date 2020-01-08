@@ -16,6 +16,12 @@ const ContactHeader = styled.h1`
     color: white;
     z-index: 2;
     line-height: 1.7;
+	@media only screen and (max-width: 550px) {
+		font-size:26px;
+	}
+	@media only screen and (max-width: 400px) {
+		font-size:22px;
+	}	
 `
 
 const ContactLink = styled.a`
@@ -62,28 +68,28 @@ class Footer extends Component {
                 </ContentSection>
                 <FooterContainer className="footer" id="footer">
                     <div className="">
-                        <FooterLinks className="d-flex flex-row">
-                            <FooterLinkItem>
+                        <FooterLinks className="d-flex flex-column flex-md-row">
+                            <FooterLinkItem className="mb-2">
                                 <FooterLink target="_new" href="https://www.facebook.com/ucsd.tesc/">
                                 <i className="fab fa-facebook-square" />
                                 </FooterLink>
                             </FooterLinkItem>
-                            <FooterLinkItem>
+                            <FooterLinkItem className="mb-2">
                                 <FooterLink target="_new" href="https://twitter.com/ucsdtesc">
                                 <i className="fab fa-twitter-square" />
                                 </FooterLink>
                             </FooterLinkItem>
-                            <FooterLinkItem>
+                            <FooterLinkItem className="mb-2">
                                 <FooterLink href="http://tesc.ucsd.edu" target="_new">
                                     <FooterLogo src="/TESC_full_logo_light.png"></FooterLogo>
                                 </FooterLink>
                             </FooterLinkItem>
-                            <FooterLinkItem>
+                            <FooterLinkItem className="mb-2">
                                 <FooterLink target="_new" href="https://www.instagram.com/ucsdtesc/">
                                 <i className="fab fa-instagram" />
                                 </FooterLink>
                             </FooterLinkItem>
-                            <FooterLinkItem>
+                            <FooterLinkItem className="mb-2">
                                 <FooterLink target="_new" href="mailto://hello@tesc.ucsd.edu">
                                 <i className="fas fa-envelope-square" />
                                 </FooterLink>

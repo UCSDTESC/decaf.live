@@ -179,7 +179,7 @@ class HomePage extends React.Component {
 							<Counter>Upload Your Resume</Counter>
 						  </div>
 						  <div className="mt-3">
-							<ReactTypeformEmbed style={{width:"100%", height:"500px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
+							<ReactTypeformEmbed style={{width:"100%", height:"525px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
 						  </div>
 						</div>
 					</Board>
