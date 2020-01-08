@@ -20,8 +20,6 @@ const input = ({ field, form: { touched, errors }, ...props }) => {
   );
 };
 
-const min_width_style = {minWidth: "225px"}
-
 class UserDataForm extends React.Component {
 
   constructor(props) {  
@@ -33,9 +31,13 @@ class UserDataForm extends React.Component {
       ticketNum: yup.number().required('Ticket Number is required'),
       phone: yup.string().matches(phoneRegex, 'Phone Number is not valid')
     })
+    this.state = {
+      success: ''
+    }
   }
 
   render() {
+    const {success} = this.state;
     return (
       <Formik
       validationSchema={this.schema}
@@ -43,7 +45,7 @@ class UserDataForm extends React.Component {
       onSubmit={async (values, { setSubmitting, setFieldError, setStatus, resetForm }) => {
         try {
           await this.props.firebase.addUserNotifInfo(values);
-          setStatus({success: 'Done!'})
+          this.setState({success: 'Done!'})
           resetForm();
         } catch {
           setFieldError('general', 'Something went wrong during form submit')
@@ -64,8 +66,8 @@ class UserDataForm extends React.Component {
         /* and other goodies */
       }) => (
       <form className="mt-3" onSubmit={handleSubmit}>
-        <div className="text-center">
-          {status ? status.success : ''}
+        <div className="text-center text-success">
+          {success}
         </div>
         <div className="row">
           <div className="col-md-12 col-sm-12">
