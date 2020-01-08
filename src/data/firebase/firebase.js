@@ -76,9 +76,8 @@ class Firebase {
 
     const message = `The current ${(east)? "East" : "West"} Ballroom ` +
                     `ticket number is ${currentTicketNum}. Your ticket ` +
-                    `is eligible to enter ${(east)? "East" : "West"} ` +
-                    `Ballroom. Visit https://decaf.live for more info. `+
-                    `See you soon!`;
+                    `is now eligible to enter the ${(east)? "East" : "West"} ` +
+                    `Ballroom.`;
 
     return [numsToSend, emailsToSend, message, currentTicketNum, docIds];
   }
@@ -91,7 +90,8 @@ class Firebase {
     });
     let smsBody = {
       'bindings': numBindings,
-      'message': message
+      'message': message +
+                 ` Visit https://decaf.live for more info. See you soon!`
     };
 
     if (numsToSend.length > 0) {

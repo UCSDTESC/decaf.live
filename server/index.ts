@@ -5,6 +5,7 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as sendgrid from '@sendgrid/mail';
 import * as Twilio from 'twilio';
+import * as fs from 'fs';
 
 function startInstance() {
   const app = express();
@@ -43,14 +44,18 @@ function startInstance() {
   });
 
   // sendgrid
+  const htmlEmail = fs.readFileSync('server/templates/email_notification.html', 'utf8');
   sendgrid.setApiKey(Config.SendgridAPIKey);
   app.post('/api/email', (req, res) => {
     res.header('Content-Type', 'application/json');
     const msg = {
       to: req.body.emails,
-      from: 'do-not-reply-decaf@tesc.ucsd.edu',
+      from: {
+          email: 'do-not-reply-decaf@tesc.ucsd.edu',
+          name: 'Triton Engineering Student Council'
+      },
       subject: 'Decaf Ticket Notification',
-      text: req.body.message
+      html: htmlEmail.replace('${req.body.message}', req.body.message)
     };
     sendgrid.sendMultiple(msg)
       .then(email => {
