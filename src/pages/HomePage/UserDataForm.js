@@ -20,6 +20,8 @@ const input = ({ field, form: { touched, errors }, ...props }) => {
   );
 };
 
+const min_width_style = {minWidth: "225px"}
+
 class UserDataForm extends React.Component {
 
   constructor(props) {  
@@ -61,28 +63,28 @@ class UserDataForm extends React.Component {
         status
         /* and other goodies */
       }) => (
-      <form className="mt-5" onSubmit={handleSubmit}>
+      <form className="mt-3" onSubmit={handleSubmit}>
         <div className="text-center">
           {status ? status.success : ''}
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-12 col-sm-12">
             <label>Full Name</label>
-            <Field name="fullName" type="text" component={input} placeholder={'King Triton'}/>
+            <Field className="mt-auto" name="fullName" type="text" component={input} placeholder={'King Triton'}/>
           </div>
-          <div className="col">
-            <label>Email</label>
-            <Field name="email" type="email" component={input} placeholder={'ktriton@ucsd.edu'} />
+          <div className="col-md-12 col-sm-12 d-flex flex-column">
+            <label>Email Address</label>
+            <Field className="mt-auto align-self-end" name="email" type="email" component={input} placeholder={'ktriton@ucsd.edu'} />
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col">
+          <div className="col-md-12 col-sm-12">
             <label>Ticket Number</label>
-            <Field name="ticketNum" type="number" component={input} placeholder={1337}/>
+            <Field className="mt-auto" name="ticketNum" type="number" component={input} placeholder={1337}/>
           </div>
-          <div className="col">
+          <div className="col-md-12 col-sm-12">
             <label>Phone Number</label>
-            <Field name="phone" type="number" component={input} placeholder={1234567890} />
+            <Field className="mt-auto" name="phone" type="number" component={input} placeholder={1234567890} />
           </div>
         </div>
         <div className="row">

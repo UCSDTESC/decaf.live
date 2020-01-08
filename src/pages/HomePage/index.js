@@ -9,6 +9,7 @@ import {withFirebase} from '../../data/firebase';
 import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
 import UserDataForm from './UserDataForm';
+import { ReactTypeformEmbed } from 'react-typeform-embed';
 
 const Logo = styled(DecafLogo)`
     width: 40%;
@@ -151,16 +152,38 @@ class HomePage extends React.Component {
             </Board>
           </div>
         </div>
-        <div className="col-md-10 offset-md-1 mt-5">
-            <Board>
-              <div className="text-center">
-                <Counter>Subscribe to Ticket Number Notifications</Counter>
-              </div>
-              <div className="container-fluid">
-                <UserDataForm />
-              </div>
-            </Board>
+		<div className="container-fluid">
+			  <div className="row">
+				<div className="col-md-4 mt-3 offset-md-1">
+					<Board>
+
+					  
+						  <div className="text-center">
+							<Counter>Subscribe to Ticket Number Notifications</Counter>
+						  </div>
+						  <div className="container-fluid">
+							<UserDataForm />
+						  </div>
+
+					</Board>
+				</div>
+				<div className="col-md-6 mt-3">
+					<Board>
+
+					  <div className="container-fluid">
+						  <div className="text-center">
+							<Counter>Upload Your Resume</Counter>
+						  </div>
+						  <div className="mt-3">
+							<ReactTypeformEmbed style={{width:"90%", height:"500px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
+						  </div>
+						</div>
+					</Board>
+				</div>
+				
+            
           </div>
+		</div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
           <Planter1 className="w-10 mt-auto mx-auto"/>
           <Planter2 className="w-10 mt-auto mx-auto"/>
