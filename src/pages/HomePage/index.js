@@ -8,11 +8,14 @@ import {ReactComponent as Planter3} from '../../svg/decaf-planter3.svg';
 import {withFirebase} from '../../data/firebase';
 import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
+import Footer from '../../components/Footer';
 import UserDataForm from './UserDataForm';
 import { ReactTypeformEmbed } from 'react-typeform-embed';
 
 const Logo = styled(DecafLogo)`
     width: 40%;
+	min-width: 150px;
+	max-width: 350px;
 `
 
 const Num = styled.span`
@@ -20,7 +23,7 @@ const Num = styled.span`
 `
 
 const Counter = styled.div`
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
 `
 
@@ -113,6 +116,7 @@ class HomePage extends React.Component {
     const {loading, eastTicketNum, westTicketNum} = this.state;
 
     return (
+	<>
       <Stripes className="container-fluid d-flex flex-column">
         {this.renderModal()}
         <div className="row w-100 mx-auto mb-auto mt-5">
@@ -175,7 +179,7 @@ class HomePage extends React.Component {
 							<Counter>Upload Your Resume</Counter>
 						  </div>
 						  <div className="mt-3">
-							<ReactTypeformEmbed style={{width:"90%", height:"500px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
+							<ReactTypeformEmbed style={{width:"100%", height:"500px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
 						  </div>
 						</div>
 					</Board>
@@ -189,7 +193,14 @@ class HomePage extends React.Component {
           <Planter2 className="w-10 mt-auto mx-auto"/>
           <Planter3 className="w-10 mt-auto mx-auto"/>
         </div>
+		<div style={{marginTop:"15px"}}>
+		<Board>
+  <Footer/>
+		</Board>
+		</div>
       </Stripes>
+
+	  </>
     );
   }
 }
