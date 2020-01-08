@@ -87,6 +87,9 @@ class UserDataForm extends React.Component {
             <Field className="mt-auto" name="phone" type="number" component={input} placeholder={1234567890} />
           </div>
         </div>
+		<div className="row mt-3" style={{fontSize:"20px"}}>
+          We will send you text (SMS) messages and emails to confirm your subscription and when you are eligible to enter each ballroom.
+        </div>
         <div className="row">
           <button type="submit" className="mx-auto mt-4 btn btn-light">Subscribe</button>
           <div className="text-center text-danger">
