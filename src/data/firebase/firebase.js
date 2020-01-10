@@ -50,6 +50,7 @@ class Firebase {
     if (userInfo.phone) {
       const usNumber = '+1' + userInfo.phone;
       const smsBody = {
+        'type': 'subscription',
         'bindings': [JSON.stringify({binding_type: 'sms', address: usNumber})],
         'message': "Hello from Decaf! You'll get a message when you can " +
                    "enter each ballroom. Remember to bring your UCSD ID, " +
@@ -71,6 +72,7 @@ class Firebase {
     // send initial email
     if (userInfo.email) {
       const emailBody = {
+        'type': 'subscription',
         'emails': [userInfo.email],
         'message': "You are now signed up to receive an email when the ticket " +
                    "number you entered is eligible to enter each ballroom."
@@ -133,6 +135,7 @@ class Firebase {
       return JSON.stringify({binding_type: 'sms', address: usNumber});
     });
     let smsBody = {
+      'type': 'notification',
       'bindings': numBindings,
       'message': message +
                  ` Visit https://decaf.live for more info. See you soon!`
@@ -154,6 +157,7 @@ class Firebase {
 
     // set up email bindings for sendgrid
     let emailBody = {
+      'type': 'notification',
       'emails': emailsToSend,
       'message': message
     }

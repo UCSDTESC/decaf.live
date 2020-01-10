@@ -13,7 +13,7 @@ export default createLogger({
     format.json()
   ),
   transports: [
-    new transports.File({filename: 'error.log', level: 'error'}),
+    new transports.File({filename: 'error.log', level: 'info'}),
     new transports.Console({
       format: format.combine(
         format.colorize(),

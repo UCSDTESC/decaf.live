@@ -6,6 +6,8 @@ import * as path from 'path';
 import * as sendgrid from '@sendgrid/mail';
 import * as Twilio from 'twilio';
 import * as fs from 'fs';
+import Logger from './config/logger';
+
 
 function startInstance() {
   const app = express();
@@ -35,9 +37,11 @@ function startInstance() {
         body: req.body.message
       })
       .then(notification => {
+        Logger.info('[SUCCESS] SMS %s sent to %d recipients for message (%s)', req.body.type, req.body.bindings.length, req.body.message);
         res.send(JSON.stringify({ success: true, notification: notification }));
       })
       .catch(err => {
+        Logger.warn('[ERROR] SMS %s for %d recipients failed with error (%s) for message (%s)', req.body.type, req.body.bindings.length, err, req.body.message);
         console.log(err);
         res.send(JSON.stringify({ success: false }));
       });
@@ -59,9 +63,11 @@ function startInstance() {
     };
     sendgrid.sendMultiple(msg)
       .then(email => {
+        Logger.info('[SUCCESS] Email %s sent to %d recipients for message (%s)', req.body.type, req.body.emails.length, req.body.message);
         res.send(JSON.stringify({ success: true, email: email }));
       })
       .catch(err => {
+        Logger.warn('[ERROR] Email %s for %d recipients failed with error (%s) for message (%s)', req.body.type, req.body.bindings.length, err, req.body.message);
         console.log(err);
         res.send(JSON.stringify({ success: false }));
       });
