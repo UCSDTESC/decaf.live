@@ -146,8 +146,10 @@ class HomePage extends React.Component {
                     </Counter>
                     <div className="my-3 ml-5">
                       <ul>
-                        <li>Please wait in line</li>
-                        <li>Thank You!</li>
+                        <li>Subscribe below to receive a message (SMS or email) when your ticket is called for each ballroom. The two lines might move at different speeds.</li>
+                        <li>When your ticket number is called for a specific ballroom, you may join the entry line for that ballroom (there might be a short wait at the door). You must bring back your <u>student ID, ticket, and wristband</u> at this time. A volunteer will validate your ticket and mark one checkbox on your wristband before allowing you to enter the ballroom.</li>
+						<li>Feel free to upload your resume below as well! Note: This is the same form as the one on the main Decaf website.</li>
+						<li>While you're waiting for your ticket to be called, sign up for Ripplematch:<br/><a href="https://ripplematch.com/index?r=7qszUz"><button class="btn btn-light">Ripplematch</button></a></li>
                       </ul>
                     </div>
                   </div>
@@ -193,7 +195,7 @@ class HomePage extends React.Component {
           <Planter2 className="w-10 mt-auto mx-auto"/>
           <Planter3 className="w-10 mt-auto mx-auto"/>
         </div>
-		<div style={{marginTop:"15px"}}>
+		<div style={{marginBottom:"15px", marginTop: "-4px", zIndex:"1"}}>
 		<Board>
   <Footer/>
 		</Board>

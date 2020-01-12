@@ -90,7 +90,7 @@ class UserDataForm extends React.Component {
           </div>
         </div>
 		<div className="row mt-3" style={{fontSize:"20px"}}>
-          We will send you text (SMS) messages and emails to confirm your subscription and when you are eligible to enter each ballroom.
+          We will send you text (SMS) messages and emails to confirm your subscription and notifications when you are eligible to enter each ballroom. If you don't want text message notifications, please leave the phone number field blank.
         </div>
         <div className="row">
           <button type="submit" className="mx-auto mt-4 btn btn-light">Subscribe</button>
