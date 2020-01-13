@@ -8,7 +8,7 @@ const PURPLE = "black";
 
 const QuestionContainer = styled.div`
     width: 100%;
-    background: white;
+    background: black;
     color: blue;
     font-size: 1.35rem;
     font-weight: bold;
@@ -31,8 +31,8 @@ const QuestionContainer = styled.div`
 `
 
 const QuestionContent = styled.div`
-    background: white;
-    color: #444;
+    background: black;
+    color: white;
 	font-size: 1.15rem;
     text-decoration: none;
     text-align: center;
@@ -40,11 +40,12 @@ const QuestionContent = styled.div`
 `
 
 const QuestionText = styled.a`
-    color: ${PURPLE};
-    text-decoration: none;
+    color: white;
+    text-decoration: underline;
 
     &:hover {
-        color: ${LIGHT_BLUE}
+        color: white;
+        text-decoration: none;
     }
 `
 

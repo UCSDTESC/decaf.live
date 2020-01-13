@@ -1,6 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import Board from '../../components/Board';
 import { withFirebase } from '../../data/firebase';
+
+const Num = styled.span`
+  color: #39ff14
+`
 
 class TicketTab extends React.Component {
 
@@ -12,7 +17,6 @@ class TicketTab extends React.Component {
       error: ''
     }
   }
-
 
   onEastInput = (e) => {
     this.setState({eastInputTicketNum: e.target.value})
@@ -49,15 +53,15 @@ class TicketTab extends React.Component {
               <div className="col-12">
                 <h3 className="text-center">
                   The Current East Ballroom Ticket Number is {' '}
-                  <span className="text-success">
+                  <Num>
                     {eastCurrTicketNum ? eastCurrTicketNum : 'Loading....'}
-                  </span>
+                  </Num>
                 </h3>
 				        <h3 className="text-center">
                   The Current West Ballroom Ticket Number is {' '}
-                  <span className="text-success">
+                  <Num>
                     {westCurrTicketNum ? westCurrTicketNum : 'Loading....'}
-                  </span>
+                  </Num>
                 </h3>
                 <div className="text-center">
                   {error}

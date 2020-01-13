@@ -16,7 +16,7 @@ import { ReactTypeformEmbed } from 'react-typeform-embed';
 import faqData from '../../data/Faq';
 
 const Logo = styled(DecafLogo)`
-    width: 40%;
+  width: 40%;
 	min-width: 150px;
 	max-width: 350px;
 `
@@ -38,7 +38,7 @@ const Underline = styled.span`
     cursor: pointer;
     color: white;
   }
-  //text-decoration-style: wavy;
+  text-decoration-style: wavy;
 `
 
 const PopupBody = styled.div`
@@ -72,7 +72,6 @@ class HomePage extends React.Component {
 
     this.unsubscribe = this.ticketRef.on('value', (data) => {
       const {eastTicketNum, westTicketNum} = data.val();
-      const {eastTicketNum: oldEastTicketNum, westTicketNum: oldWestTicketNum } = this.state;
       this.setState({
         loading: false,
         eastTicketNum: eastTicketNum,
@@ -152,8 +151,8 @@ class HomePage extends React.Component {
 					<b>Important Reminders:</b><br/>
 					<ul>
 					<li>After your ticket number is called, remember to bring your <u>ticket, UCSD ID, and wristband</u> back to the ballrooms.</li>
-					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="#upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a></li>
-					<li>Have questions? Check out the <a href="#faq">FAQ section</a> below</li>
+					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="#upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a>.</li>
+					<li>Have questions? Check out the <a href="#faq">FAQ section</a> below.</li>
 					</ul>
 					
                       
@@ -165,7 +164,7 @@ class HomePage extends React.Component {
           </div>
         </div>
 		<div className="container-fluid">
-			  <div className="row">
+			  <div className="row h-100">
 				<div className="col-md-4 mt-3 offset-md-1">
 					<Board>
             <div id="subscribe" className="text-center">
@@ -176,14 +175,14 @@ class HomePage extends React.Component {
             </div>
 					</Board>
 				</div>
-				<div className="col-md-6 mt-3">
-					<Board>
-					  <div id="upload" className="container-fluid">
+				<div className="col-md-6 mt-3 align-self-stretch">
+					<Board className="h-100" style={{ height: "100%" }}>
+					  <div id="upload" className="container-fluid h-100">
 						  <div  className="text-center">
 							  <Counter>Upload Your Resume</Counter>
 						  </div>
-						  <div className="mt-3">
-							  <ReactTypeformEmbed style={{width:"100%", height:"525px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
+						  <div className="mt-3 d-flex">
+							  <ReactTypeformEmbed className='align-self-center justify-self-center' style={{width:"100%", height:"600px", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
 						  </div>
 						</div>
 					</Board>
@@ -192,7 +191,7 @@ class HomePage extends React.Component {
 		</div>
 		<div className="container-fluid mt-3 col-md-10 offset-md-1">
 				<Board>
-					<div id="faq" className="container-fluid text-center" style={{paddingLeft:"0px",paddingRight:"0px"}}>
+					<div id="faq" className="container-fluid text-center px-0" >
 						<Counter>FAQ</Counter>
 						<div className="col-sm-12 col-md-10 offset-md-1 mt-1 mb-1">
 								{faqData.map((d, i) => <Question 
@@ -211,26 +210,23 @@ class HomePage extends React.Component {
 		<div className="container-fluid">
 			  <div className="row">
 				<div className="col-md-5 mt-3 offset-md-1">
-					<Board>
+					<Board className="h-100">
 						  <div id="east_maps" className="text-center">
 							<Counter className="mb-1">East Ballroom Company Map</Counter>
 								<div className="container-fluid">
-								<a href="/east.svg" ><img src="/east.svg" className="mb-3 mt-1" width="100%"/></a>
-								<a href="/east.pdf"><button className="btn btn-light">East Ballroom Map (PDF)</button></a>
+								<a href="/east.pdf" target="_blank"><img src="/east.svg" className="mb-3 mt-1" width="100%"/></a>
+								<a href="/east.pdf" target="_blank"><button className="btn btn-light">East Ballroom Map (PDF)</button></a>
 								</div>
 						  </div>
-
-
 					</Board>
 				</div>
 				<div className="col-md-5 mt-3">
 					<Board>
-
 						  <div id="west_maps" className="text-center">
 							<Counter className="mb-1">West Ballroom Company Map</Counter>
-								<div className="container-fluid">
-								<a href="/west.svg" ><img src="/west.svg" className="mb-3 mt-1" width="100%"/></a>
-								<a href="/west.pdf"><button className="btn btn-light">West Ballroom Map (PDF)</button></a>
+								<div className="d-flex flex-column">
+								<a href="/west.pdf" target="_blank"><img src="/west.svg" className="mb-3 mt-1" width="100%"/></a>
+								<a className="justify-self-end" href="/west.pdf" target="_blank"><button className="btn btn-light">West Ballroom Map (PDF)</button></a>
 								</div>
 						  </div>
 					</Board>

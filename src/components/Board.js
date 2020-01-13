@@ -16,11 +16,12 @@ const Outline = styled.div`
   width: calc(100% - 30px);
   border: 3px white solid;
   padding: 15px;
+  height: 100%;
 `
 
 function Board(props) {
   return (
-    <Base>
+    <Base className={props.className}>
       <Outline>
         {props.children}
       </Outline>
