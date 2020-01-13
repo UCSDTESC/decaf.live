@@ -122,7 +122,7 @@ class HomePage extends React.Component {
 	<>
       <Stripes className="container-fluid d-flex flex-column">
         {this.renderModal()}
-        <div className="row w-100 mx-auto mb-auto mt-5">
+        <div className="row w-100 mx-auto mb-auto mt-3">
           <div className="col-md-10 offset-md-1">
             <Board>
               <div className="container-fluid">
@@ -132,7 +132,7 @@ class HomePage extends React.Component {
                       <Logo />
                     </div>
                     <Counter className="text-center mt-2">
-                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.East})}>East Ballroom</Underline> Ticket Number: {' '}
+                      Current <a href="#east_maps">East Ballroom</a> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
@@ -140,7 +140,7 @@ class HomePage extends React.Component {
                       : <Num>{eastTicketNum}</Num>}
                     </Counter>
                     <Counter className="text-center mt-2">
-                      Current <Underline onClick={() => this.setState({currentModal: ModalStates.West})}>West Ballroom</Underline> Ticket Number: {' '}
+                      Current <a href="#west_maps">West Ballroom</a> Ticket Number: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
@@ -151,7 +151,8 @@ class HomePage extends React.Component {
 					<b>Important Reminders:</b><br/>
 					<ul>
 					<li>After your ticket number is called, remember to bring your <u>ticket, UCSD ID, and wristband</u> back to the ballrooms.</li>
-					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a></li>
+					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="#upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a></li>
+					<li>Have questions? Check out the <a href="#faq">FAQ section</a> below</li>
 					</ul>
 					
                       
@@ -197,7 +198,7 @@ class HomePage extends React.Component {
 		<div className="container-fluid mt-3 col-md-10 offset-md-1">
 			
 				<Board>
-					<div className="container-fluid text-center" style={{paddingLeft:"0px",paddingRight:"0px"}}>
+					<div id="faq" className="container-fluid text-center" style={{paddingLeft:"0px",paddingRight:"0px"}}>
 						<Counter>FAQ</Counter>
 						<div className="col-sm-12 col-md-10 offset-md-1 mt-1 mb-1">
 								{faqData.map((d, i) => <Question 
@@ -212,6 +213,37 @@ class HomePage extends React.Component {
 					
 				</Board>
 			
+		</div>
+		<div className="container-fluid">
+			  <div className="row">
+				<div className="col-md-5 mt-3 offset-md-1">
+					<Board>
+						  <div id="east_maps" className="text-center">
+							<Counter className="mb-1">East Ballroom Company Map</Counter>
+								<div className="container-fluid">
+								<a href="/east.svg" ><img src="/east.svg" className="mb-3 mt-1" width="100%"/></a>
+								<a href="/east.pdf"><button className="btn btn-light">East Ballroom Map (PDF)</button></a>
+								</div>
+						  </div>
+
+
+					</Board>
+				</div>
+				<div className="col-md-5 mt-3">
+					<Board>
+
+						  <div id="west_maps" className="text-center">
+							<Counter className="mb-1">West Ballroom Company Map</Counter>
+								<div className="container-fluid">
+								<a href="/west.svg" ><img src="/west.svg" className="mb-3 mt-1" width="100%"/></a>
+								<a href="/west.pdf"><button className="btn btn-light">West Ballroom Map (PDF)</button></a>
+								</div>
+						  </div>
+					</Board>
+				</div>
+				
+            
+          </div>
 		</div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
           <Planter1 className="w-10 mt-auto mx-auto"/>

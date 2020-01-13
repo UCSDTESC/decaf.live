@@ -25,7 +25,10 @@ const faq = [
         question: `What do I do while waiting for my ticket to be called?`,
 	answer: (<>We strongly recommend <a href="#upload">uploading your resume</a> via the form above and signing up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a>. Feel free to go to class 😅 or otherwise relax. If you've subscribed for notifications, we'll let you know when to come back.</>)
     },
-    
+    {
+        question: `What companies are attending/which ballroom are they in?`,
+	answer: (<>Check out the list of attending companies <a target="_blank" href="https://tesc.ucsd.edu/decaf/attending">here</a>. See the maps for <a href="#east_maps">East</a> and <a href="#west_maps">West</a> Ballrooms to find out where companies are located.</>)
+    },
 ]
 
 export default faq;
