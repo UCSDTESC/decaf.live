@@ -68,7 +68,6 @@ class HomePage extends React.Component {
   }
 
   async componentDidMount() {
-    const notificationsAreSupported = ("Notification" in window);
     this.ticketRef = this.props.firebase.tickets();
 
     this.unsubscribe = this.ticketRef.on('value', (data) => {
@@ -79,22 +78,7 @@ class HomePage extends React.Component {
         eastTicketNum: eastTicketNum,
 		    westTicketNum: westTicketNum
       })
-
-      if (notificationsAreSupported && eastTicketNum != oldEastTicketNum) {
-        new Notification('Boom 💥! Decaf East Ballroom Ticket Number Updated', {
-          body: `The new east ballroom ticket number is ${eastTicketNum}`
-        });
-      }
-
-      if (notificationsAreSupported && westTicketNum != oldWestTicketNum) {
-        new Notification('Boom 💥! Decaf West Ballroom Ticket Number Updated', {
-          body: `The new west ballroom ticket number is ${westTicketNum}`
-        });
-      }
-
     }, (err) => console.error(err))
-
-    notificationsAreSupported && Notification.permission !== 'granted' && await Notification.requestPermission();
   }  
 
   componentWillUnmount() {
