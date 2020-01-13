@@ -82,7 +82,7 @@ class HomePage extends React.Component {
 
       if (notificationsAreSupported && eastTicketNum != oldEastTicketNum) {
         new Notification('Boom 💥! Decaf East Ballroom Ticket Number Updated', {
-          body: `The new east ticket number is ${eastTicketNum}`
+          body: `The new east ballroom ticket number is ${eastTicketNum}`
         });
       }
 
@@ -94,7 +94,7 @@ class HomePage extends React.Component {
 
     }, (err) => console.error(err))
 
-    notificationsAreSupported && await Notification.requestPermission();
+    notificationsAreSupported && Notification.permission !== 'granted' && await Notification.requestPermission();
   }  
 
   componentWillUnmount() {
