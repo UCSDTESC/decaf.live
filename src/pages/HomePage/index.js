@@ -68,16 +68,33 @@ class HomePage extends React.Component {
   }
 
   async componentDidMount() {
+    const notificationsAreSupported = ("Notification" in window);
     this.ticketRef = this.props.firebase.tickets();
+
     this.unsubscribe = this.ticketRef.on('value', (data) => {
-      const eastTicketNum = data.val().eastTicketNum;
-      const westTicketNum = data.val().westTicketNum;
+      const {eastTicketNum, westTicketNum} = data.val();
+      const {eastTicketNum: oldEastTicketNum, westTicketNum: oldWestTicketNum } = this.state;
       this.setState({
         loading: false,
         eastTicketNum: eastTicketNum,
 		    westTicketNum: westTicketNum
       })
+
+      if (notificationsAreSupported && eastTicketNum != oldEastTicketNum) {
+        new Notification('Boom 💥! Decaf East Ballroom Ticket Number Updated', {
+          body: `The new east ticket number is ${eastTicketNum}`
+        });
+      }
+
+      if (notificationsAreSupported && westTicketNum != oldWestTicketNum) {
+        new Notification('Boom 💥! Decaf West Ballroom Ticket Number Updated', {
+          body: `The new west ballroom ticket number is ${westTicketNum}`
+        });
+      }
+
     }, (err) => console.error(err))
+
+    notificationsAreSupported && await Notification.requestPermission();
   }  
 
   componentWillUnmount() {
@@ -119,7 +136,7 @@ class HomePage extends React.Component {
     const {loading, eastTicketNum, westTicketNum} = this.state;
 
     return (
-	<>
+	  <>
       <Stripes className="container-fluid d-flex flex-column">
         {this.renderModal()}
         <div className="row w-100 mx-auto mb-auto mt-5">
@@ -166,47 +183,40 @@ class HomePage extends React.Component {
 			  <div className="row">
 				<div className="col-md-4 mt-3 offset-md-1">
 					<Board>
-
-					  
-						  <div id="subscribe" className="text-center">
-							<Counter>Subscribe to Ticket Number Notifications</Counter>
-						  </div>
-						  <div className="container-fluid">
-							<UserDataForm />
-						  </div>
-
+            <div id="subscribe" className="text-center">
+              <Counter>Subscribe to Ticket Number Notifications</Counter>
+            </div>
+            <div className="container-fluid">
+              <UserDataForm />
+            </div>
 					</Board>
 				</div>
 				<div className="col-md-6 mt-3">
 					<Board>
-
 					  <div id="upload" className="container-fluid">
 						  <div  className="text-center">
-							<Counter>Upload Your Resume</Counter>
+							  <Counter>Upload Your Resume</Counter>
 						  </div>
 						  <div className="mt-3">
-							<ReactTypeformEmbed style={{width:"100%", height:"525px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
+							  <ReactTypeformEmbed style={{width:"100%", height:"525px", marginLeft:"auto",marginRight:"auto", position:"static"}} url="https://tesc.typeform.com/to/hwNBpM"/>
 						  </div>
 						</div>
 					</Board>
-				</div>
-				
-            
+				</div>  
           </div>
 		</div>
 		<div className="container-fluid mt-3 col-md-10 offset-md-1">
-			
 				<Board>
 					<div className="container-fluid text-center" style={{paddingLeft:"0px",paddingRight:"0px"}}>
 						<Counter>FAQ</Counter>
 						<div className="col-sm-12 col-md-10 offset-md-1 mt-1 mb-1">
 								{faqData.map((d, i) => <Question 
-														{...d} 
-														key={i} 
-														idx={i}
-														isLast={i === faqData.length - 1}
-														isFirst = {i === 0}
-													/>)}
+                  {...d} 
+                  key={i} 
+                  idx={i}
+                  isLast={i === faqData.length - 1}
+                  isFirst = {i === 0}
+									/>)}
 						</div>
 					</div>
 					
@@ -219,12 +229,11 @@ class HomePage extends React.Component {
           <Planter3 className="w-10 mt-auto mx-auto"/>
         </div>
 		<div style={{marginBottom:"15px", marginTop: "-4px", zIndex:"1"}}>
-		<Board>
-  <Footer/>
-		</Board>
+      <Board>
+        <Footer/>
+      </Board>
 		</div>
-      </Stripes>
-
+    </Stripes>
 	  </>
     );
   }
