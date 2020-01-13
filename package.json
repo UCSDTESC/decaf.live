@@ -17,6 +17,8 @@
     "express": "^4.17.1",
     "firebase": "^7.6.1",
     "formik": "^2.1.1",
+    "jQuery": "^1.7.4",
+    "jquery": "^3.4.1",
     "mongoose": "^5.8.3",
     "nodemon": "^2.0.2",
     "react": "^16.12.0",

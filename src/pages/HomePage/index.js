@@ -9,8 +9,11 @@ import {withFirebase} from '../../data/firebase';
 import BallroomModal from './BallroomModal';
 import Stripes from '../../components/Stripes';
 import Footer from '../../components/Footer';
+import Question from '../../components/Question';
 import UserDataForm from './UserDataForm';
 import { ReactTypeformEmbed } from 'react-typeform-embed';
+
+import faqData from '../../data/Faq';
 
 const Logo = styled(DecafLogo)`
     width: 40%;
@@ -144,18 +147,19 @@ class HomePage extends React.Component {
                         </div>)
                       : <Num>{westTicketNum}</Num>}
                     </Counter>
-                    <div className="my-3 ml-5">
-                      <ul>
-                        <li>Subscribe below to receive a message (SMS or email) when your ticket is called for each ballroom. The two lines might move at different speeds.</li>
-                        <li>When your ticket number is called for a specific ballroom, you may join the entry line for that ballroom (there might be a short wait at the door). You must bring back your <u>student ID, ticket, and wristband</u> at this time. A volunteer will validate your ticket and mark one checkbox on your wristband before allowing you to enter the ballroom.</li>
-						<li>Feel free to upload your resume below as well! Note: This is the same form as the one on the main Decaf website.</li>
-						<li>While you're waiting for your ticket to be called, sign up for Ripplematch:<br/><a href="https://ripplematch.com/index?r=7qszUz"><button class="btn btn-light">Ripplematch</button></a></li>
-                      </ul>
+                    
+					<b>Important Reminders:</b><br/>
+					<ul>
+					<li>After your ticket number is called, remember to bring your <u>ticket, UCSD ID, and wristband</u> back to the ballrooms.</li>
+					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a></li>
+					</ul>
+					
+                      
                     </div>
                   </div>
                 </div>
-              </div>
             </Board>
+			
           </div>
         </div>
 		<div className="container-fluid">
@@ -164,7 +168,7 @@ class HomePage extends React.Component {
 					<Board>
 
 					  
-						  <div className="text-center">
+						  <div id="subscribe" className="text-center">
 							<Counter>Subscribe to Ticket Number Notifications</Counter>
 						  </div>
 						  <div className="container-fluid">
@@ -176,8 +180,8 @@ class HomePage extends React.Component {
 				<div className="col-md-6 mt-3">
 					<Board>
 
-					  <div className="container-fluid">
-						  <div className="text-center">
+					  <div id="upload" className="container-fluid">
+						  <div  className="text-center">
 							<Counter>Upload Your Resume</Counter>
 						  </div>
 						  <div className="mt-3">
@@ -189,6 +193,25 @@ class HomePage extends React.Component {
 				
             
           </div>
+		</div>
+		<div className="container-fluid mt-3 col-md-10 offset-md-1">
+			
+				<Board>
+					<div className="container-fluid text-center" style={{paddingLeft:"0px",paddingRight:"0px"}}>
+						<Counter>FAQ</Counter>
+						<div className="col-sm-12 col-md-10 offset-md-1 mt-1 mb-1">
+								{faqData.map((d, i) => <Question 
+														{...d} 
+														key={i} 
+														idx={i}
+														isLast={i === faqData.length - 1}
+														isFirst = {i === 0}
+													/>)}
+						</div>
+					</div>
+					
+				</Board>
+			
 		</div>
         <div className="d-flex align-items-center w-100 mt-auto mx-auto">
           <Planter1 className="w-10 mt-auto mx-auto"/>
