@@ -18,3 +18,7 @@ html, body {
 .mt-6 {
   margin-top: 6rem;
 }
+
+a {
+  color: #43D2F0;
+}

@@ -128,8 +128,10 @@ class Firebase {
     return [numsToSend, emailsToSend, message, currentTicketNum, docIds];
   }
 
-  sendNotifications = (east, numsToSend, emailsToSend, message, docIds) => {
-    // set up number bindings for twilio
+  sendNotifications = async (east, numsToSend, emailsToSend, message, docIds) => {
+    // set up number bindings for twilio\
+    let didEmailsError = false;
+    let didSMSError = false;
     let numBindings = numsToSend.map(number => {
       let usNumber = "+1" + number;
       return JSON.stringify({binding_type: 'sms', address: usNumber});
@@ -142,17 +144,20 @@ class Firebase {
     };
 
     if (numsToSend.length > 0) {
-      fetch('/api/sms', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(smsBody)
-      })
-      .then((res) => console.log(res))
-      .catch(err => {
+      try {
+        const res = await fetch('/api/sms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(smsBody)
+        })
+        if (!res.ok) throw Error('SMS failed')
+        console.log(res)
+      } catch(err) {
+        didSMSError = true;
         console.log(err);
-      });
+      };
     }
 
     // set up email bindings for sendgrid
@@ -163,17 +168,21 @@ class Firebase {
     }
 
     if (emailsToSend.length > 0) {
-      fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(emailBody)
-      })
-      .then((res) => console.log(res))
-      .catch(err => {
+      try {
+        const res = await fetch('/api/email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(emailBody)
+        })
+        
+        if (!res.ok) throw Error('Email failed')
+        console.log(res)
+      } catch(err)  {
+        didEmailsError = true;
         console.log(err);
-      });
+      };
     }
 
     // batch write to firebase
@@ -181,7 +190,7 @@ class Firebase {
     let batch = this.firestore.batch();
     for (const id of docIds) {
       let curRef = this.firestore.collection('userData').doc(id);
-      batch.update(curRef, {[notifiedWhich]: true});
+      batch.update(curRef, {[notifiedWhich]: !(didEmailsError && didSMSError)});
     }
 
     return batch.commit();

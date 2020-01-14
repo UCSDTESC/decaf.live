@@ -26,7 +26,7 @@ const Num = styled.span`
 `
 
 const Counter = styled.div`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
 `
 
@@ -131,31 +131,35 @@ class HomePage extends React.Component {
                     <div className="text-center">
                       <Logo />
                     </div>
-                    <Counter className="text-center mt-2">
-                      Current <a href="#east_maps">East Ballroom</a> Ticket Number: {' '}
+
+                    <div className="text-center mt-2 mb-1">
+                      If your ticket number is in the range for a ballroom, you will be allowed to enter that ballroom.
+                    </div>
+                    <Counter className="text-center">
+                      Current <a href="#east_maps">East Ballroom</a> Ticket Number Range: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
                         </div>)
-                      : <Num>{eastTicketNum}</Num>}
+                      :<> <Num>0</Num> to <Num>{eastTicketNum}</Num></>}
                     </Counter>
                     <Counter className="text-center mt-2">
-                      Current <a href="#west_maps">West Ballroom</a> Ticket Number: {' '}
+                      Current <a href="#west_maps">West Ballroom</a> Ticket Number Range: {' '}
                       {loading ? (
                         <div class="spinner-border ml-2" role="status">
                           <span class="sr-only">Loading...</span>
                         </div>)
-                      : <Num>{westTicketNum}</Num>}
+                      : <><Num>0</Num> to <Num>{westTicketNum}</Num></>}
                     </Counter>
-                    
+          
+          <br />
 					<b>Important Reminders:</b><br/>
 					<ul>
-					<li>After your ticket number is called, remember to bring your <u>ticket, UCSD ID, and wristband</u> back to the ballrooms.</li>
+					<li>When you return to a ballroom, remember to bring your <u>ticket, UCSD ID, and wristband</u>.</li>
 					<li>Remember to <a href="#subscribe">subscribe</a> to ticket number notifications, <a href="#upload">upload your resume</a>, and sign up for <a target="_blank" href="https://ripplematch.com/index?r=7qszUz">RippleMatch</a>.</li>
 					<li>Have questions? Check out the <a href="#faq">FAQ section</a> below.</li>
 					</ul>
-					
-                      
+
                     </div>
                   </div>
                 </div>

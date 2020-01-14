@@ -45,7 +45,7 @@ class UserDataForm extends React.Component {
       onSubmit={async (values, { setSubmitting, setFieldError, setStatus, resetForm }) => {
         try {
           await this.props.firebase.addUserNotifInfo(values);
-          this.setState({success: 'Done!'})
+          this.setState({success: 'Successfully subcribed to notifications!'})
           resetForm();
         } catch {
           setFieldError('general', 'Something went wrong during form submit')
