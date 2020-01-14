@@ -121,8 +121,8 @@ class Firebase {
     }
 
     const message = `The current ${(east)? "East" : "West"} Ballroom ` +
-                    `ticket number is ${currentTicketNum}. Your ticket ` +
-                    `is now eligible to enter the ${(east)? "East" : "West"} ` +
+                    `ticket number range is 0 - ${currentTicketNum}. You are ` +
+                    `eligible to enter the ${(east)? "East" : "West"} ` +
                     `Ballroom.`;
 
     return [numsToSend, emailsToSend, message, currentTicketNum, docIds];
@@ -176,7 +176,7 @@ class Firebase {
           },
           body: JSON.stringify(emailBody)
         })
-        
+
         if (!res.ok) throw Error('Email failed')
         console.log(res)
       } catch(err)  {
