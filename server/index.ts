@@ -8,7 +8,6 @@ import * as Twilio from 'twilio';
 import * as fs from 'fs';
 import Logger from './config/logger';
 
-
 function startInstance() {
   const app = express();
 
