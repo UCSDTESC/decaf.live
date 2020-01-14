@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -22,6 +23,7 @@ class Firebase {
     this.provider = new app.auth.GoogleAuthProvider();
     this.db = app.database();
     this.firestore = app.firestore();
+    this.analytics = app.analytics();
   }
 
   tickets = () => this.db.ref('ticket')
