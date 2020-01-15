@@ -28,7 +28,7 @@ class UserDataForm extends React.Component {
     this.schema = yup.object({
       fullName: yup.string().required('Name is required'),
       email: yup.string().email('Invalid Email'),
-      ticketNum: yup.number().required('Ticket Number is required'),
+      ticketNum: yup.number().min(1, 'Ticket Number Must Be Above 0').required('Ticket Number is required'),
       phone: yup.string().matches(phoneRegex, 'Phone Number is not valid')
     })
     this.state = {
