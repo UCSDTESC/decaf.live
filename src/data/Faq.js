@@ -31,7 +31,7 @@ const faq = [
     },
 	{
         question: `What is RippleMatch?	`,
-		answer: <>RippleMatch is sponsoring Decaf this year! The RippleMatch job-matching platform helps you land more interviews at top companies like Citadel, Pfizer, NASA, IBM, and TripAdvisor. Can’t make it to Decaf, bored of waiting in line, or didn’t find the job opportunity you wanted? Want companies to contact you? You can go to <a href="bit.ly/rmdecaf">bit.ly/rmdecaf</a> to register for RippleMatch.</>
+		answer: <>RippleMatch is sponsoring Decaf this year! The RippleMatch job-matching platform helps you land more interviews at top companies like Citadel, Pfizer, NASA, IBM, and TripAdvisor. Can’t make it to Decaf, bored of waiting in line, or didn’t find the job opportunity you wanted? Want companies to contact you? You can go to <a href="http://bit.ly/rmdecaf" target="_blank">bit.ly/rmdecaf</a> to register for RippleMatch.</>
     },
     {
         question: `What companies are attending/which ballroom are they in?`,
