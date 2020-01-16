@@ -115,6 +115,12 @@ class HomePage extends React.Component {
     }
   }
 
+  markFAQAnalytics = (number) => {
+    this.props.firebase.analytics.logEvent('faq_tab_click', {
+      number
+    });
+  }
+
   render() {
     const {loading, eastTicketNum, westTicketNum} = this.state;
 
@@ -202,6 +208,7 @@ class HomePage extends React.Component {
                   {...d} 
                   key={i} 
                   idx={i}
+                  onClick={() => this.markFAQAnalytics(i)}
                   isLast={i === faqData.length - 1}
                   isFirst = {i === 0}
 									/>)}

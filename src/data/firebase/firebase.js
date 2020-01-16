@@ -76,8 +76,10 @@ class Firebase {
       const emailBody = {
         'type': 'subscription',
         'emails': [userInfo.email],
-        'message': "You are now signed up to receive an email when the ticket " +
-                   "number you entered is eligible to enter each ballroom."
+        'message': "You entered " + userInfo.ticketNum + " as your ticket " +
+                   "number. You are now signed up to receive an email when " +
+                   "the ticket number you entered is eligible to enter each " +
+                   "ballroom."
       }
       fetch('/api/email', {
         method: 'POST',

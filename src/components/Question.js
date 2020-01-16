@@ -58,12 +58,13 @@ class Question extends Component {
             question, 
             answer,
             isFirst,
-            isLast
+            isLast,
+            onClick
         } = this.props;
 
         return (
             <>
-                <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true" onClick={onClick}>
                     <div className="panel panel-default">
                         <div className="panel-heading" id={`heading-${idx}`} role="tab">
                             <QuestionContainer className="panel-title" isLast={isLast} isFirst={isFirst}>

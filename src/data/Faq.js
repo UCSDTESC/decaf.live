@@ -6,6 +6,10 @@ const faq = [
         answer: <>Just inside the West Ballroom Foyer entrance by the Bookstore, there will be a ticket issuance table. We'll be issuing tickets until we reach our maximum capacity for the day. You <b>MUST</b> bring your <b>UCSD ID</b> to get a ticket.</>
     },
 	{
+        question: `What if I have a FLO ticket?`,
+        answer: <>FLO allows you to enter the ballrooms from 8am-9am at the very beginning of the event. If you cannot attend during that hour, having a FLO ticket means that you are eligible to enter the lines in front of each Ballroom door (whereas general admission attendees will only be allowed into those lines on a rolling basis throughout the day after 9am). Having FLO access means you do not have to wait in the general admission ticket issuance line to receive a ticket, and you will have an earlier ticket number than anyone in the general admission line.<br/><br/>Note that there is no order in the per-ballroom lines except for first-come, first-served, and the speed at which these lines move will be dependent on the speed at which people exit the ballrooms.</>
+    },
+	{
         question: `What do I do with the ticket that I received?`,
         answer: <>This year, we are implementing a ticketing system for Decaf to cut down the amount of time you need to wait in line. The ticket (the sticker with a ticket number and QR code) represents your place in line. Once you have a ticket, you can leave (go to class, get food, etc.) and come back when your ticket number is eligible to enter the line for each ballroom. <b><u>DO NOT LOSE YOUR TICKET!</u></b></>
     },
